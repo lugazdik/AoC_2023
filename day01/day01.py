@@ -1,3 +1,4 @@
+"""Description: Advent of Code (https://adventofcode.com/2023/day/1)"""
 digit_dict = {
     "zero": "0",
     "one": "1",
