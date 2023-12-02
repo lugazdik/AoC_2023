@@ -7,11 +7,20 @@ def read_input(input_path: str):
         for line in f.readlines():
             split_line = line.strip().split(":")
             game_id = int(split_line[0].split(" ")[1])
-            parsed_input[game_id] = [{item.split(" ")[1]: int(item.split(" ")[0]) for item in draw.split(", ")} for draw in split_line[1].strip().split("; ")]
+            parsed_input[game_id] = [
+                {
+                    item.split(" ")[1]: int(item.split(" ")[0])
+                    for item in draw.split(", ")
+                }
+                for draw in split_line[1].strip().split("; ")
+            ]
         return parsed_input
 
 
-def part1(parsed_input, max_cubes):
+def part1(
+    parsed_input: dict[int, list[dict[str, int]]],
+    max_cubes: dict[str, int],
+) -> int:
     possible_game_ids = []
     for game_id, draws in parsed_input.items():
         possible = True
@@ -25,9 +34,9 @@ def part1(parsed_input, max_cubes):
     return sum(possible_game_ids)
 
 
-def part2(parsed_input):
+def part2(parsed_input: dict[int, list[dict[str, int]]]) -> int:
     result = 0
-    for game_id, draws in parsed_input.items():
+    for _, draws in parsed_input.items():
         cube_count = {"blue": 0, "green": 0, "red": 0}
         for draw in draws:
             for color, amount in draw.items():
