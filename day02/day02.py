@@ -7,19 +7,7 @@ def read_input(input_path: str):
         for line in f.readlines():
             split_line = line.strip().split(":")
             game_id = int(split_line[0].split(" ")[1])
-            draws = []
-            for draw in split_line[1].strip().split("; "):
-                parsed_draw = {"blue": 0, "green": 0, "red": 0}
-                for item in draw.split(", "):
-                    split_item = item.split(" ")
-                    if split_item[1] == "blue":
-                        parsed_draw["blue"] += int(split_item[0])
-                    elif split_item[1] == "green":
-                        parsed_draw["green"] += int(split_item[0])
-                    elif split_item[1] == "red":
-                        parsed_draw["red"] += int(split_item[0])
-                draws.append(parsed_draw)
-            parsed_input[game_id] = draws
+            parsed_input[game_id] = [{item.split(" ")[1]: int(item.split(" ")[0]) for item in draw.split(", ")} for draw in split_line[1].strip().split("; ")]
         return parsed_input
 
 
