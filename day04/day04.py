@@ -1,5 +1,5 @@
 def parse_card_numbers(card_numbers: str) -> set[int]:
-    return {int(number) for number in card_numbers.split(" ") if number != ""}
+    return {int(number) for number in card_numbers.split()}
 
 
 def read_input(input_path: str) -> dict[int, dict[str, set[int]]]:
@@ -7,7 +7,7 @@ def read_input(input_path: str) -> dict[int, dict[str, set[int]]]:
         parsed_input = {}
         for line in f.readlines():
             split_line = line.strip().split(":")
-            card_id = int(split_line[0].split(" ")[-1])
+            card_id = int(split_line[0].split()[1])
             split_card_numbers = str(split_line[1]).strip().split(" | ")
             winning_numbers = parse_card_numbers(split_card_numbers[0])
             card_numbers = parse_card_numbers(split_card_numbers[1])
