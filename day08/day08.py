@@ -1,4 +1,4 @@
-from math import gcd
+from math import lcm
 from itertools import cycle
 
 
@@ -48,12 +48,7 @@ def part2(parsed_input: dict[str, list[str] | dict[str, str]]) -> int:
     end_steps = [
         find_end_state(parsed_input, start, end_states) for start in current_states
     ]
-    least_common_multiple = 1
-    for steps in end_steps:
-        least_common_multiple = (
-            least_common_multiple * steps // gcd(least_common_multiple, steps)
-        )
-    return least_common_multiple
+    return lcm(*end_steps)
 
 
 prepared_file = read_input("day08.txt")
